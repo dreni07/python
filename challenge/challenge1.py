@@ -4,7 +4,8 @@ class DigitalSchool:
         self.__name = name
         self.__city = city
         self.__state = state
-        self.__courses = courses
+        self._courses = courses
+        self._students = {}
 
     # we use the decorator property
     # and then then a get method to get any private property that we have
@@ -32,13 +33,6 @@ class DigitalSchool:
     def get_state(self,new_state):
         self.__state = new_state
 
-    @property
-    def get_courses(self):
-        return self.__courses
-
-    @get_courses.setter
-    def get_courses(self,new_courses):
-        self.__courses = new_courses
 
     # school info in an dictionarie
     def school_info(self):
@@ -47,18 +41,44 @@ class DigitalSchool:
             'city':self.__city,
             'state':self.__state,
             'courses':self.__courses
-
         }
 
         return school_i
 
+    def admin_part(self):
+        password = 'drenllazani'
+        admin_check = input('If You Are Admin Enter Password: ').lower()
+        if admin_check == password:
+            print(self._students)
+
+class Register(DigitalSchool):
     def see_courses(self):
         user_input = input('Want To Watch Our Courses And Decide? ').lower()
         if user_input == 'yes':
-            print(self.__courses)
+            print(self._courses)
             get_answer = input('Please Decide Now: ')
-            get_actual_course = self.__courses[get_answer]
-            print('Congrats You Choose The Course',get_actual_course)
+            get_actual_course = self._courses[get_answer]
+            print('Congrats You Choose The Course', get_actual_course)
+            asking = input('Want To Get Registered Now? :').lower()
+            if asking == 'yes':
+                self.register_to_course(get_answer)
+    def register_to_course(self,course_name):
+        user_name = input('Enter Your Name:')
+        user_email = input('Enter Your Email:')
+        user_phone = input('Enter Your Phone Number:')
+        into_keys = list(self._students.keys())
+        if len(into_keys) == 0:
+            the_index = 0
+        else:
+            the_index = into_keys[len(into_keys) + 1]
+
+        self._students[the_index] = {
+            'name': user_name,
+            'email': user_email,
+            'phone_number': user_phone,
+            'course': self._courses[course_name]
+        }
+        self.admin_part()
 
 
 school_courses = {
@@ -80,5 +100,6 @@ school_courses = {
     }
 }
 
-digital_school = DigitalSchool('Shkolla Digjitale','Prishtine','Kosovo',school_courses)
+digital_school = Register('Shkolla Digjitale','Prishtine','Kosovo',school_courses)
 digital_school.see_courses()
+
