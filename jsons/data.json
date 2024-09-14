@@ -1,0 +1,15 @@
+{
+  "name": "Dren",
+  "age": 17,
+  "birthday": "April",
+  "hobbies":[
+    {
+      "HobbyName": "Gym",
+      "HobbyMood": 10
+    },
+    {
+      "HobbyName": "Coding",
+      "HobbyMood": 10
+    }
+  ]
+}

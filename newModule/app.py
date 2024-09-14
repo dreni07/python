@@ -1,7 +1,5 @@
-import streamlit as st
 import pandas as pd
 import streamlit as st
-import pandas as pd
 import plotly.express as px
 
 # 1 importing all the libraries
@@ -108,8 +106,9 @@ if the_submit:
     st.sidebar.success('Well Done Added New Book')
 
     # filter data
-    # the_data = books_df[books_df['Name'] == new_data['Name']]
-    # st.write(the_data)
 # filtering
+figura = px.pie(books_df,names='Genre',title='Author&Genre',color='Author',color_discrete_sequence=px.colors.sequential.Plasma)
+st.plotly_chart(figura)
+
 
 
